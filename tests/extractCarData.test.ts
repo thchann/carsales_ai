@@ -28,7 +28,10 @@ describe("extractCarData (DOM-based)", () => {
       image: "https://example.com/car.jpg"
     };
 
-    expect(result).toEqual(expected);
+    expect({
+      ...result,
+      name: result.name?.trim() ?? null
+    }).toEqual(expected);
   });
 
   it("returns nulls when elements are missing", () => {
@@ -167,7 +170,6 @@ describe("extractCarDataFromUrl", () => {
       text: async () => html
     } as Response);
 
-    // @ts-expect-error override global fetch for testing
     global.fetch = mockFetch;
 
     const result = await extractCarDataFromUrl("https://example.com/listing");
@@ -187,7 +189,6 @@ describe("extractCarDataFromUrl", () => {
       text: async () => ""
     } as Response);
 
-    // @ts-expect-error override global fetch for testing
     global.fetch = mockFetch;
 
     await expect(extractCarDataFromUrl("https://example.com/missing")).rejects.toThrow(

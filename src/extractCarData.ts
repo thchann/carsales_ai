@@ -1,3 +1,5 @@
+import { JSDOM } from "jsdom"
+
 export interface CarData {
   name: string | null;
   year: string | null;
@@ -95,7 +97,6 @@ export function extractCarDataFromHtml(html: string): CarData {
   // (bundlers / environments can tree-shake or polyfill as needed).
   // In Node and tests, jsdom will be available via dependency.
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { JSDOM } = require("jsdom") as typeof import("jsdom");
   const dom = new JSDOM(html);
   return extractCarData(dom.window.document);
 }

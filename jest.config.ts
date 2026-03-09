@@ -7,6 +7,7 @@ const config: Config = {
   moduleFileExtensions: ["ts", "js", "json"],
   testMatch: ["**/*.test.ts"],
   clearMocks: true,
+  setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.ts"],
   transform: {
     "^.+\\.tsx?$": "ts-jest"
   }
